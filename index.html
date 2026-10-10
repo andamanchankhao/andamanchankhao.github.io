@@ -10,6 +10,30 @@
 <style>
 body{margin:0;background:#F2F4EF}
 a{color:#2E6A4C}a:hover{color:#18241D}
+.pub{padding:20px 0;border-bottom:1px solid #C9D2C6;display:grid;grid-template-columns:200px minmax(0,1fr);gap:28px;align-items:start}
+.pub-fig{display:block;box-sizing:border-box;aspect-ratio:4/3;padding:6px;background:#FFFFFF;border:1px solid #C9D2C6;border-radius:6px;overflow:hidden;cursor:zoom-in;transition:border-color .15s,box-shadow .2s,transform .2s}
+.pub:hover .pub-fig{border-color:#2E6A4C}
+.pub-fig:hover,.pub-fig:focus-visible{border-color:#2E6A4C;box-shadow:0 8px 20px rgba(24,36,29,.14);transform:translateY(-2px)}
+.pub-fig:focus-visible{outline:2px solid #2E6A4C;outline-offset:3px}
+.pub-fig img{display:block;width:100%;height:100%;object-fit:contain;transition:transform .3s}
+.pub-fig:hover img{transform:scale(1.04)}
+.pub-fig--empty{display:flex;align-items:center;justify-content:center;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#2E6A4C;text-decoration:none;cursor:pointer}
+.pub-fig--empty:hover{background:#F2F7F3}
+.pub-peek{position:fixed;z-index:50;box-sizing:border-box;padding:10px 10px 8px;background:#FFFFFF;border:1px solid #C9D2C6;border-radius:8px;box-shadow:0 18px 48px rgba(24,36,29,.22);pointer-events:none;visibility:hidden;opacity:0;transform:translateX(-6px);transition:opacity .16s,transform .16s,visibility 0s linear .16s}
+.pub-peek.is-open{visibility:visible;opacity:1;transform:none;transition-delay:0s}
+.pub-peek img{display:block;width:100%;height:auto;border-radius:4px}
+.pub-peek p{margin:8px 2px 0;display:flex;justify-content:space-between;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#4A5A50}
+.pub-peek b{font-weight:500;color:#9A5418;text-transform:uppercase;letter-spacing:.06em}
+.pub-body{display:flex;flex-wrap:wrap;gap:4px 32px}
+.pub-year{font-family:'IBM Plex Mono',monospace;font-size:14px;color:#2E6A4C;min-width:56px}
+.pub-text{flex:1 1 420px}
+.cites{display:flex;align-items:center;width:fit-content;min-height:44px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4A5A50}
+a.cites{color:#2E6A4C;text-underline-offset:3px}
+a.cites::after{content:"\2192";margin-left:6px;opacity:0;transform:translateX(-4px);transition:opacity .15s,transform .15s}
+a.cites:hover::after,a.cites:focus-visible::after{opacity:1;transform:none}
+@media (max-width:600px){.pub{grid-template-columns:96px minmax(0,1fr);gap:16px}.pub-fig{padding:3px}}
+@media (hover:none){.pub-peek{display:none}.pub-fig{cursor:pointer}}
+@media (prefers-reduced-motion:reduce){.pub-fig,.pub-fig img,.pub-peek,a.cites::after{transition:none}.pub-fig:hover,.pub-fig:focus-visible,.pub-fig:hover img{transform:none}}
 </style>
 <style>html{scroll-behavior:smooth}</style>
 </head>
@@ -53,11 +77,12 @@ a{color:#2E6A4C}a:hover{color:#18241D}
 <!-- STATS -->
 <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px 56px">
 <dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); border-top: 1px solid #D5DBD2; border-bottom: 1px solid #D5DBD2">
-<div style="padding: 24px 0; display: flex; flex-direction: column-reverse; gap: 4px"><dt style="font-size: 15px; color: #4A5A50">Peer-reviewed papers</dt><dd style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 44px; line-height: 1">9</dd></div>
+<div style="padding: 24px 0; display: flex; flex-direction: column-reverse; gap: 4px"><dt style="font-size: 15px; color: #4A5A50">Peer-reviewed papers</dt><dd data-stat="works" style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 44px; line-height: 1">9</dd></div>
+<div style="padding: 24px 0; display: flex; flex-direction: column-reverse; gap: 4px"><dt style="font-size: 15px; color: #4A5A50">Citations</dt><dd data-stat="citations" style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 44px; line-height: 1">35</dd></div>
+<div style="padding: 24px 0; display: flex; flex-direction: column-reverse; gap: 4px"><dt style="font-size: 15px; color: #4A5A50">h-index</dt><dd data-stat="hindex" style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 44px; line-height: 1">4</dd></div>
 <div style="padding: 24px 0; display: flex; flex-direction: column-reverse; gap: 4px"><dt style="font-size: 15px; color: #4A5A50">Research projects since 2016</dt><dd style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 44px; line-height: 1">7</dd></div>
-<div style="padding: 24px 0; display: flex; flex-direction: column-reverse; gap: 4px"><dt style="font-size: 15px; color: #4A5A50">Courses taught</dt><dd style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 44px; line-height: 1">9</dd></div>
-<div style="padding: 24px 0; display: flex; flex-direction: column-reverse; gap: 4px"><dt style="font-size: 15px; color: #4A5A50">Oral presentations</dt><dd style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 44px; line-height: 1">4</dd></div>
 </dl>
+<p id="metrics-note" style="margin: 10px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4A5A50">Citation metrics: <a href="https://openalex.org/A5057758750" style="color: #4A5A50">OpenAlex</a></p>
 </div>
 
 <!-- NDVI legend strip -->
@@ -84,8 +109,8 @@ a{color:#2E6A4C}a:hover{color:#18241D}
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px">
 <article style="background: #FFFFFF; border: 1px solid #D5DBD2; border-radius: 8px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
-<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #2E6A4C">Featured · <i>Journal of Wildlife Management</i> · 2025</span>
-<h3 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; line-height: 1.25">Time-dependence forage quality for large herbivores in seasonally dry forest, western Thailand</h3>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #2E6A4C">Featured · <i>Journal of Wildlife Management</i> · 2026</span>
+<h3 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; line-height: 1.25"><a href="https://doi.org/10.1002/jwmg.70135" style="color: #18241D">Time-dependence of forage quality for large herbivores in seasonally dry tropical forests, western Thailand</a></h3>
 </article>
 <article style="background: #FFFFFF; border: 1px solid #D5DBD2; border-radius: 8px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #2E6A4C">Featured · <i>Forests</i> · 2022</span>
@@ -168,17 +193,18 @@ a{color:#2E6A4C}a:hover{color:#18241D}
 </div>
 <a href="https://orcid.org/0000-0002-3749-8151" style="font-weight: 600; padding: 10px 0">Full record on ORCID →</a>
 </div>
-<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; font-size: 16px">
-<li style="padding: 18px 0; border-bottom: 1px solid #C9D2C6; display: flex; flex-wrap: wrap; gap: 4px 32px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2E6A4C; min-width: 56px">2025</span><span style="flex: 1 1 520px"><b>Chankhao, A.</b>, Kongmun, P., Kraichak, E., Phumsathan, S., &amp; Pongpattananurak, N. Time-dependence forage quality for large herbivores in seasonally dry forest, western Thailand. <i>Journal of Wildlife Management, 90</i>(1), e70135.</span></li>
-<li style="padding: 18px 0; border-bottom: 1px solid #C9D2C6; display: flex; flex-wrap: wrap; gap: 4px 32px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2E6A4C; min-width: 56px">2025</span><span style="flex: 1 1 520px">Lieb, Z. E., Meijaard, E., … <b>Chankhao, A.</b>, … Luskin, M. S. Mapping multiple wild pig species' population dynamics in Southeast Asia during the African Swine Fever outbreak (2018–2024). <i>Conservation Letters, 17</i>(2), e13105.</span></li>
-<li style="padding: 18px 0; border-bottom: 1px solid #C9D2C6; display: flex; flex-wrap: wrap; gap: 4px 32px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2E6A4C; min-width: 56px">2024</span><span style="flex: 1 1 520px">Phumsathan, S., Thongwichit, K., Simcharoen, A., Suksavate, W., Kraichak, E., <b>Chankhao, A.</b>, &amp; Pongpattananurak, N. Factors affecting habitat use of Asian elephants for the buffer zone management and conservation of Huai Kha Khaeng World Heritage Site, Thailand. <i>Global Ecology and Conservation, 56</i>, e03302.</span></li>
-<li style="padding: 18px 0; border-bottom: 1px solid #C9D2C6; display: flex; flex-wrap: wrap; gap: 4px 32px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2E6A4C; min-width: 56px">2024</span><span style="flex: 1 1 520px">Sattraburut, T., Yuttitham, M., Vongvassana, S., Pattanakiat, S., <b>Chankhao, A.</b>, &amp; Prueksakorn, K. Rapid decline in soil organic carbon stocks following forest-to-maize field conversion within a watershed in northern Thailand. <i>Environmental Challenges, 70</i>, 101042.</span></li>
-<li style="padding: 18px 0; border-bottom: 1px solid #C9D2C6; display: flex; flex-wrap: wrap; gap: 4px 32px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2E6A4C; min-width: 56px">2023</span><span style="flex: 1 1 520px"><b>Chankhao, A.</b>, Nakmuenwai, P., Pattanakiat, S., Vongvassana, S., Suksavate, W., Kongsila, T., &amp; Duengkae, P. House sparrow <i>Passer domesticus</i> as an invasive bird in Thailand: Natural dispersion or introduced species? <i>Ecologica Montenegrina, 80</i>, 94–105.</span></li>
-<li style="padding: 18px 0; border-bottom: 1px solid #C9D2C6; display: flex; flex-wrap: wrap; gap: 4px 32px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2E6A4C; min-width: 56px">2023</span><span style="flex: 1 1 520px">Sukmasuang, R., Chaisomboon, P., Paansri, P., Trisurat, Y., Kanka, P., Khiowsree, N., Kaewdee, B., Siripattanukul, K., &amp; <b>Chankhao, A.</b> Abundance and factors affecting the appearance of Siamese fireback and red junglefowl in the lowland forest of Thailand. <i>Biodiversitas, 24</i>(10), 5718–5730.</span></li>
-<li style="padding: 18px 0; border-bottom: 1px solid #C9D2C6; display: flex; flex-wrap: wrap; gap: 4px 32px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2E6A4C; min-width: 56px">2023</span><span style="flex: 1 1 520px"><b>Chankhao, A.</b>, Meevanasukkul, P., Dumrongtawat, N., Bhumpakphan, N., Sukmasuang, R., Chimchome, V., Suksavate, W., Sutummawong, N., Pongcharoen, C., Nakmuenwai, P., &amp; Duengkae, P. Correlation between resident birds and anthropogenic noise and particulate matter: A case study at Kasetsart University, Bangkok, Thailand. <i>Agriculture and Natural Resources, 57</i>, 11–20.</span></li>
-<li style="padding: 18px 0; border-bottom: 1px solid #C9D2C6; display: flex; flex-wrap: wrap; gap: 4px 32px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2E6A4C; min-width: 56px">2022</span><span style="flex: 1 1 520px"><b>Chankhao, A.</b>, Kraichak, E., Phumsathan, S., &amp; Pongpattananurak, N. Dynamics of forage and management implications for large herbivore habitat in seasonally dry forest of Southeast Asia. <i>Forests, 13</i>, 1463. <a href="https://doi.org/10.3390/f13091463">doi.org/10.3390/f13091463</a></span></li>
-<li style="padding: 18px 0; border-bottom: 1px solid #C9D2C6; display: flex; flex-wrap: wrap; gap: 4px 32px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2E6A4C; min-width: 56px">2020</span><span style="flex: 1 1 520px">Ariyaphithak, C., Pongpattananurak, N., Pattanavibool, A., Podchong, S., &amp; <b>Chankhao, A.</b> Applying SMART patrol database for creating species distribution model of <i>Panthera tigris corbetti</i> in Western Forest Complex, Thailand. <i>Journal of Environmental Management, 16</i>(2), 42–59. (In Thai) <a href="https://doi.org/10.14456/jem.2020.10">doi.org/10.14456/jem.2020.10</a></span></li>
+<ol id="pub-list" style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; font-size: 16px">
+<li data-pub data-doi="10.1002/jwmg.70135" class="pub"><a class="pub-fig" href="https://doi.org/10.1002/jwmg.70135"><img src="images/pub-forage-quality.jpg" data-full="images/pub-forage-quality-lg.jpg" alt="Graphical abstract from the article: forest scenes in the dry, early rainy and late rainy seasons, showing how forage protein and fibre change through the year" width="566" height="480" loading="lazy"></a><div class="pub-body"><span class="pub-year">2026</span><span class="pub-text"><b>Chankhao, A.</b>, Kongmun, P., Kraichak, E., Phumsathan, S., &amp; Pongpattananurak, N. Time-dependence of forage quality for large herbivores in seasonally dry tropical forests, western Thailand. <i>Journal of Wildlife Management, 90</i>(1), e70135.</span></div></li>
+<li data-pub data-doi="10.1111/conl.13105" class="pub"><a class="pub-fig" href="https://doi.org/10.1111/conl.13105"><img src="images/pub-wild-pig-asf.jpg" data-full="images/pub-wild-pig-asf-lg.jpg" alt="Figure 1 from the article: maps of Southeast Asia for each year from 2018 to 2024, coloured by whether experts saw wild pig populations declining or recovering" width="605" height="480" loading="lazy"></a><div class="pub-body"><span class="pub-year">2025</span><span class="pub-text">Lieb, Z. E., Meijaard, E., … <b>Chankhao, A.</b>, … Luskin, M. S. Mapping multiple wild pig species' population dynamics in Southeast Asia during the African Swine Fever outbreak (2018–2024). <i>Conservation Letters, 18</i>(3), e13105.</span></div></li>
+<li data-pub data-doi="10.1016/j.gecco.2024.e03302" class="pub"><a class="pub-fig" href="https://doi.org/10.1016/j.gecco.2024.e03302"><img src="images/pub-elephant-habitat.jpg" data-full="images/pub-elephant-habitat-lg.jpg" alt="Figure 3 from the article: map of the study area beside Huai Kha Khaeng with a grid of square transect plots and management zones" width="640" height="389" loading="lazy"></a><div class="pub-body"><span class="pub-year">2024</span><span class="pub-text">Phumsathan, S., Thongwichit, K., Simcharoen, A., Suksavate, W., Kraichak, E., <b>Chankhao, A.</b>, &amp; Pongpattananurak, N. Factors affecting habitat use of Asian elephants for the buffer zone management and conservation of Huai Kha Khaeng World Heritage Site, Thailand. <i>Global Ecology and Conservation, 56</i>, e03302.</span></div></li>
+<li data-pub data-doi="10.1016/j.envc.2024.101042" class="pub"><a class="pub-fig" href="https://doi.org/10.1016/j.envc.2024.101042"><img src="images/pub-soil-carbon.jpg" data-full="images/pub-soil-carbon-lg.jpg" alt="Figure 3 from the article: soil texture triangle with sampling sites coloured by soil series" width="464" height="480" loading="lazy"></a><div class="pub-body"><span class="pub-year">2024</span><span class="pub-text">Sattraburut, T., Yuttitham, M., Vongvassana, S., Pattanakiat, S., <b>Chankhao, A.</b>, &amp; Prueksakorn, K. Rapid decline in soil organic carbon stocks following forest-to-maize field conversion within a watershed in northern Thailand. <i>Environmental Challenges, 17</i>, 101042.</span></div></li>
+<li data-pub data-doi="10.37828/em.2024.80.9" class="pub"><a class="pub-fig" href="https://doi.org/10.37828/em.2024.80.9"><img src="images/pub-house-sparrow.jpg" data-full="images/pub-house-sparrow-lg.jpg" alt="Figure 2 from the article: three maps of Thailand showing grid cells with house sparrow records in 1995, 2010 and 2020" width="640" height="365" loading="lazy"></a><div class="pub-body"><span class="pub-year">2024</span><span class="pub-text"><b>Chankhao, A.</b>, Nakmuenwai, P., Pattanakiat, S., Vongvassana, S., Suksavate, W., Kongsila, T., &amp; Duengkae, P. House sparrow <i>Passer domesticus</i> as an invasive bird in Thailand: Natural dispersion or introduced species? <i>Ecologica Montenegrina, 80</i>, 94–105.</span></div></li>
+<li data-pub data-doi="10.13057/biodiv/d241054" class="pub"><a class="pub-fig" href="https://doi.org/10.13057/biodiv/d241054"><img src="images/pub-junglefowl.jpg" data-full="images/pub-junglefowl-lg.jpg" alt="Figure 1 from the article: location maps and camera-trap points (red dots) in the lowland study area, Thailand" width="640" height="376" loading="lazy"></a><div class="pub-body"><span class="pub-year">2023</span><span class="pub-text">Sukmasuang, R., Chaisomboon, P., Paansri, P., Trisurat, Y., Kanka, P., Khiowsree, N., Kaewdee, B., Siripattanukul, K., &amp; <b>Chankhao, A.</b> Abundance and factors affecting the appearance of Siamese fireback and red junglefowl in the lowland forest of Thailand. <i>Biodiversitas, 24</i>(10), 5718–5730.</span></div></li>
+<li data-pub data-doi="10.34044/j.anres.2023.57.1.02" class="pub"><a class="pub-fig" href="https://doi.org/10.34044/j.anres.2023.57.1.02"><img src="images/pub-campus-birds.jpg" data-full="images/pub-campus-birds-lg.jpg" alt="Figure 1 from the article: satellite image of Kasetsart University Bangkhen campus with bird observation points" width="630" height="480" loading="lazy"></a><div class="pub-body"><span class="pub-year">2023</span><span class="pub-text"><b>Chankhao, A.</b>, Meevanasukkul, P., Dumrongtawat, N., Bhumpakphan, N., Sukmasuang, R., Chimchome, V., Suksavate, W., Sutummawong, N., Pongcharoen, C., Nakmuenwai, P., &amp; Duengkae, P. Correlation between resident birds and anthropogenic noise and particulate matter: A case study at Kasetsart University, Bangkok, Thailand. <i>Agriculture and Natural Resources, 57</i>, 11–20.</span></div></li>
+<li data-pub data-doi="10.3390/f13091463" class="pub"><a class="pub-fig" href="https://doi.org/10.3390/f13091463"><img src="images/pub-forage-dynamics.jpg" data-full="images/pub-forage-dynamics-lg.jpg" alt="Figure 1 from the article: four camera photographs of large herbivores in the forest" width="640" height="441" loading="lazy"></a><div class="pub-body"><span class="pub-year">2022</span><span class="pub-text"><b>Chankhao, A.</b>, Kraichak, E., Phumsathan, S., &amp; Pongpattananurak, N. Dynamics of forage and management implications for large herbivore habitat in seasonally dry forest of Southeast Asia. <i>Forests, 13</i>, 1463. <a href="https://doi.org/10.3390/f13091463">doi.org/10.3390/f13091463</a></span></div></li>
+<li data-pub data-doi="10.14456/jem.2020.10" class="pub"><a class="pub-fig" href="https://doi.org/10.14456/jem.2020.10"><img src="images/pub-tiger-sdm.jpg" alt="Figure 4 from the article: maps of the Western Forest Complex showing modelled tiger habitat suitability and habitat patches" width="560" height="420" loading="lazy"></a><div class="pub-body"><span class="pub-year">2020</span><span class="pub-text">Ariyaphithak, C., Pongpattananurak, N., Pattanavibool, A., Podchong, S., &amp; <b>Chankhao, A.</b> Applying SMART patrol database for creating species distribution model of <i>Panthera tigris corbetti</i> in Western Forest Complex, Thailand. <i>Journal of Environmental Management, 16</i>(2), 42–59. (In Thai) <a href="https://doi.org/10.14456/jem.2020.10">doi.org/10.14456/jem.2020.10</a></span></div></li>
 </ol>
+<p style="margin: -24px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4A5A50">Figures are reproduced from each article under its licence, © the authors and publishers. Citation counts are live from <a href="https://openalex.org/A5057758750" style="color: #4A5A50">OpenAlex</a>.</p>
 <div style="display: flex; flex-direction: column; gap: 16px; padding-top: 16px">
 <h3 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700">Oral presentations</h3>
 <ul style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; font-size: 15px">
@@ -246,5 +272,135 @@ a{color:#2E6A4C}a:hover{color:#18241D}
 </section>
 
 </div>
+<script>
+/* Hover (or keyboard focus) on a figure tile shows a larger preview beside it. */
+(function () {
+  var list = document.getElementById('pub-list'); if (!list) return;
+  var fine = window.matchMedia ? matchMedia('(hover: hover) and (pointer: fine)') : { matches: false };
+  var peek, big, label, timer, current, shown, frame;
+  var CHROME = 22, CAPTION = 30;
+  // Built on first use, so the page has no empty <img> before anyone hovers.
+  function build() {
+    peek = document.createElement('div'); peek.className = 'pub-peek'; peek.setAttribute('aria-hidden', 'true');
+    peek.innerHTML = '<img alt=""><p><b></b><span>Click to open the article</span></p>';
+    document.body.appendChild(peek);
+    big = peek.querySelector('img'); label = peek.querySelector('b');
+  }
+  function hide() { clearTimeout(timer); current = shown = null; if (peek) peek.classList.remove('is-open'); }
+  function ratioOf(img) { return Number(img.getAttribute('height')) / Number(img.getAttribute('width')) || 0.75; }
+  // Size and place the preview to the right of the tile, inside the viewport.
+  function place(fig) {
+    var img = fig.querySelector('img'), r = fig.getBoundingClientRect(), ratio = ratioOf(img);
+    var w = Math.min(640, innerWidth - r.right - 40, (innerHeight - 24 - CAPTION) / ratio + CHROME);
+    if (w < 320 || r.bottom < 0 || r.top > innerHeight) { hide(); return; }
+    var h = (w - CHROME) * ratio + CHROME + CAPTION;
+    peek.style.width = w + 'px';
+    peek.style.left = (r.right + 16) + 'px';
+    peek.style.top = Math.max(12, Math.min(r.top + r.height / 2 - h / 2, innerHeight - h - 12)) + 'px';
+  }
+  function show(fig) {
+    var img = fig.querySelector('img'); if (!img) return;
+    if (!peek) build();
+    if (shown !== fig) {
+      shown = fig;
+      big.style.aspectRatio = String(1 / ratioOf(img));
+      big.src = img.currentSrc || img.src;
+      var full = img.getAttribute('data-full');
+      if (full) { var hi = new Image(); hi.onload = function () { if (shown === fig) big.src = full; }; hi.src = full; }
+      label.textContent = img.alt.split(':')[0].replace(/ from the article$/, '');
+    }
+    place(fig);
+    if (shown) peek.classList.add('is-open');
+  }
+  list.addEventListener('mouseover', function (e) {
+    var fig = e.target.closest && e.target.closest('.pub-fig');
+    if (!fig || fig === current || !fine.matches) return;
+    clearTimeout(timer); current = fig;
+    timer = setTimeout(function () { if (current === fig) show(fig); }, 120);
+  });
+  list.addEventListener('mouseout', function (e) {
+    var fig = e.target.closest && e.target.closest('.pub-fig');
+    if (fig && !fig.contains(e.relatedTarget)) hide();
+  });
+  list.addEventListener('focusin', function (e) {
+    if (e.target.classList.contains('pub-fig')) { current = e.target; show(e.target); }
+  });
+  list.addEventListener('focusout', hide);
+  addEventListener('scroll', function () {
+    if (!shown || frame) return;
+    frame = requestAnimationFrame(function () { frame = null; if (shown) place(shown); });
+  }, { passive: true });
+  addEventListener('resize', hide);
+  addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
+})();
+</script>
+<script>
+/* Live update from OpenAlex (free, no key). Keeps the static content if anything fails. */
+(function () {
+  var ORCID = '0000-0002-3749-8151';
+  var API = 'https://api.openalex.org';
+  var ME = /chankhao/i;
+  function words(s) { return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').split(' ').filter(function (w) { return w.length > 2; }); }
+  function covers(title, text) {
+    var t = words(title), set = {}; words(text).forEach(function (w) { set[w] = 1; });
+    if (!t.length) return 0; var hit = 0; t.forEach(function (w) { if (set[w]) hit++; }); return hit / t.length;
+  }
+  function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
+  function stat(k, v) { var el = document.querySelector('[data-stat="' + k + '"]'); if (el && v != null) el.textContent = Number(v).toLocaleString('en-US'); }
+  // Citation line under each article: links to the citing works when there are any.
+  function cites(li, label, href) {
+    var t = li.querySelector('.pub-text'); if (!t) return;
+    var old = t.querySelector('.cites'); if (old) old.remove();
+    var el = document.createElement(href ? 'a' : 'span'); el.className = 'cites';
+    if (href) el.href = href;
+    el.textContent = label; t.appendChild(el);
+  }
+  function json(u) { return fetch(u, { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }); }
+
+  json(API + '/authors/orcid:' + ORCID).then(function (a) {
+    stat('citations', a.cited_by_count);
+    stat('hindex', a.summary_stats && a.summary_stats.h_index);
+    var note = document.getElementById('metrics-note');
+    if (note && a.updated_date) note.firstChild.textContent = 'Live citation metrics, updated ' + a.updated_date.slice(0, 10) + ' · ';
+    var id = String(a.id).split('/').pop();
+    return json(API + '/works?filter=author.id:' + id + '&per-page=100&sort=publication_date:desc');
+  }).then(function (d) {
+    var list = document.getElementById('pub-list'); if (!list) return;
+    var items = [].slice.call(list.querySelectorAll('li[data-pub]'));
+    var seen = [];
+    var ok = { 'article': 1, 'review': 1, 'book-chapter': 1, 'letter': 1, 'book': 1 };
+    (d.results || []).forEach(function (w) {
+      if (!ok[w.type] || w.is_retracted) return;
+      var doi = String(w.doi || '').replace(/^https?:\/\/doi\.org\//i, '').toLowerCase();
+      var n = w.cited_by_count || 0;
+      var wid = String(w.id || '').split('/').pop();
+      var label = 'Cited by ' + n.toLocaleString('en-US');
+      var href = n && wid ? 'https://openalex.org/works?filter=cites:' + wid : '';
+      var li = items.filter(function (x) { return doi && x.getAttribute('data-doi').toLowerCase() === doi; })[0]
+            || items.filter(function (x) { var t = x.querySelector('.pub-text'); return covers(w.display_name, t ? t.textContent : x.textContent) >= 0.8; })[0];
+      if (li) { cites(li, label, href); seen.push(li); return; }
+      // a new paper not yet on the page
+      var names = (w.authorships || []).map(function (s) { return s.author && s.author.display_name; }).filter(Boolean);
+      if (!names.some(function (n) { return ME.test(n); })) return;
+      var shown = names.slice(0, 3).map(function (n) { return ME.test(n) ? '<b>' + esc(n) + '</b>' : esc(n); });
+      if (names.length > 3) shown.push(names.slice(3).some(function (n) { return ME.test(n); }) ? '… <b>Chankhao, A.</b>, et al.' : 'et al.');
+      var src = w.primary_location && w.primary_location.source && w.primary_location.source.display_name;
+      var link = doi ? 'https://doi.org/' + esc(doi) : esc(w.id);
+      var el = document.createElement('li');
+      el.setAttribute('data-pub', ''); el.setAttribute('data-doi', doi); el.className = 'pub';
+      el.innerHTML = '<a class="pub-fig pub-fig--empty" href="' + link + '">Open article</a>' +
+        '<div class="pub-body"><span class="pub-year">' + esc(w.publication_year) + '</span><span class="pub-text">' +
+        shown.join(', ') + '. ' + esc(w.display_name) + '. ' + (src ? '<i>' + esc(src) + '</i>. ' : '') +
+        (doi ? '<a href="https://doi.org/' + esc(doi) + '">doi.org/' + esc(doi) + '</a>' : '') + '</span></div>';
+      cites(el, label, href); seen.push(el);
+      var after = items.filter(function (x) { return Number(x.querySelector('.pub-year').textContent) <= Number(w.publication_year); })[0];
+      list.insertBefore(el, after || null);
+      items = [].slice.call(list.querySelectorAll('li[data-pub]'));
+    });
+    items.forEach(function (li) { if (seen.indexOf(li) < 0) cites(li, 'Not indexed by OpenAlex'); });
+    stat('works', items.length);
+  }).catch(function () { /* offline or API down: keep static numbers */ });
+})();
+</script>
 </body>
 </html>
