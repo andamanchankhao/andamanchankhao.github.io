@@ -31,9 +31,25 @@ a{color:#2E6A4C}a:hover{color:#18241D}
 a.cites{color:#2E6A4C;text-underline-offset:3px}
 a.cites::after{content:"\2192";margin-left:6px;opacity:0;transform:translateX(-4px);transition:opacity .15s,transform .15s}
 a.cites:hover::after,a.cites:focus-visible::after{opacity:1;transform:none}
-@media (max-width:600px){.pub{grid-template-columns:96px minmax(0,1fr);gap:16px}.pub-fig{padding:3px}}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:calc((min(100vw - 48px, 1200px) - 24px) / 4);gap:12px}
+.gallery figure{position:relative;margin:0;overflow:hidden;border-radius:8px;background:#DDE3DA}
+.gallery .g-tall{grid-row:span 2}
+.gallery img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;transform:scale(var(--zoom,1));transition:transform .5s ease}
+.gallery figure:hover img{transform:scale(calc(var(--zoom,1) * 1.04))}
+.gallery figcaption{position:absolute;left:10px;bottom:10px;max-width:calc(100% - 20px);box-sizing:border-box;padding:4px 9px;border-radius:4px;background:rgba(24,36,29,.84);color:#FFFFFF;font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.5}
+.proj{display:grid;grid-template-columns:200px minmax(0,1fr);gap:28px;align-items:start;padding:18px 0;border-bottom:1px solid #D5DBD2}
+.proj-body{grid-column:2;display:flex;flex-wrap:wrap;gap:4px 32px}
+.proj-year{font-family:'IBM Plex Mono',monospace;font-size:14px;color:#2E6A4C;min-width:120px}
+.proj-text{flex:1 1 360px}
+.proj-photo{grid-column:1;margin:0;aspect-ratio:4/3;overflow:hidden;border-radius:6px;background:#DDE3DA;transition:box-shadow .2s,transform .2s}
+.proj-photo:hover{box-shadow:0 8px 20px rgba(24,36,29,.14);transform:translateY(-2px)}
+.proj-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:45% 60%;transform:scale(var(--zoom,1));transition:transform .5s ease}
+.proj-photo:hover img{transform:scale(calc(var(--zoom,1) * 1.04))}
+@media (max-width:760px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:calc((100vw - 56px) * .375);gap:8px}.gallery figcaption{left:6px;bottom:6px;max-width:calc(100% - 12px);padding:3px 7px;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+@media (max-width:600px){.pub{grid-template-columns:96px minmax(0,1fr);gap:16px}.pub-fig{padding:3px}.proj{grid-template-columns:96px minmax(0,1fr);gap:16px}.proj-body:only-child{grid-column:1 / -1}}
 @media (hover:none){.pub-peek{display:none}.pub-fig{cursor:pointer}}
-@media (prefers-reduced-motion:reduce){.pub-fig,.pub-fig img,.pub-peek,a.cites::after{transition:none}.pub-fig:hover,.pub-fig:focus-visible,.pub-fig:hover img{transform:none}}
+@media (hover:hover) and (pointer:fine){.proj-photo{cursor:zoom-in}}
+@media (prefers-reduced-motion:reduce){.pub-fig,.pub-fig img,.pub-peek,a.cites::after,.gallery img,.proj-photo,.proj-photo img{transition:none}.pub-fig:hover,.pub-fig:focus-visible,.pub-fig:hover img{transform:none}.gallery figure:hover img{transform:scale(var(--zoom,1))}.proj-photo:hover img{transform:scale(var(--zoom,1))}.proj-photo:hover{transform:none}}
 </style>
 <style>html{scroll-behavior:smooth}</style>
 </head>
@@ -97,15 +113,18 @@ a.cites:hover::after,a.cites:focus-visible::after{opacity:1;transform:none}
 <div style="display: flex; flex-direction: column; gap: 16px">
 <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #9A5418">01 — Research</p>
 <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 40px; line-height: 1.1; letter-spacing: -0.02em">Forage, herbivores and the people who share their landscape</h2>
-<figure style="margin: 16px 0 0; display: flex; flex-direction: column; gap: 10px">
-<img src="images/portrait-camera-trap.jpg" alt="Andaman crouching beside a camera trap strapped to a tree in the forest" style="display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px">
-<figcaption style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5A50">Setting a camera trap</figcaption>
-</figure>
 </div>
 <div style="display: flex; flex-direction: column; gap: 20px; color: #2C3A31">
 <p style="margin: 0">Seasonally dry forests change sharply between wet and dry seasons, and so does the food available to large herbivores. My work measures how forage quantity and quality shift through the year, and maps them across the landscape so protected-area managers can plan habitat and buffer zones.</p>
 <p style="margin: 0">My doctoral research follows long-term forage dynamics in dipterocarp forest using permanent forest plots, and scales them up with Sentinel-1 radar, Sentinel-2 optical imagery and ensemble machine learning. I'm especially interested in plant–animal interactions and human–wildlife conflict, which are still little studied in Thailand.</p>
 </div>
+</div>
+<div class="gallery">
+<figure class="g-tall"><img src="images/dry-season-quadrat.jpg" alt="A researcher smiling in tall dry grass among leafless trees, holding up a square quadrat frame" style="object-position: 52% 50%" loading="lazy"><figcaption>Dry-season quadrat</figcaption></figure>
+<figure><img src="images/bovine-understory.jpg" alt="A horned, reddish-brown bovine looking out between tree trunks, framed by blurred orange and green leaves" style="object-position: 52% 55%; --zoom: 1.7; transform-origin: 52% 60%" loading="lazy"><figcaption>Large herbivore</figcaption></figure>
+<figure><img src="images/portrait-camera-trap.jpg" alt="Andaman crouching beside a camera trap strapped to a tree in the forest" loading="lazy"><figcaption>Camera trapping</figcaption></figure>
+<figure><img src="images/field-team-measuring.jpg" alt="Three people in a green forest clearing: one bends to measure vegetation with a tape, one watches, and one in a camouflage uniform takes notes" loading="lazy"><figcaption>Measuring vegetation</figcaption></figure>
+<figure><img src="images/plant-specimens.jpg" alt="Overhead view of a person arranging rows of pressed plant specimens on white sheets across the floor" style="object-position: 50% 40%" loading="lazy"><figcaption>Plant specimens</figcaption></figure>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px">
 <article style="background: #FFFFFF; border: 1px solid #D5DBD2; border-radius: 8px; padding: 28px; display: flex; flex-direction: column; gap: 12px">
@@ -172,13 +191,13 @@ a.cites:hover::after,a.cites:focus-visible::after{opacity:1;transform:none}
 <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 40px; line-height: 1.1; letter-spacing: -0.02em">Ten years in the field</h2>
 </div>
 <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
-<li style="display: flex; flex-wrap: wrap; gap: 4px 32px; padding: 18px 0; border-bottom: 1px solid #D5DBD2"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2E6A4C; min-width: 120px">2024 – now</span><span style="flex: 1 1 480px">Thailand's wild pig status after the African Swine Fever pandemic and its abundance impacts on plant communities</span></li>
-<li style="display: flex; flex-wrap: wrap; gap: 4px 32px; padding: 18px 0; border-bottom: 1px solid #D5DBD2"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2E6A4C; min-width: 120px">2023 – 2024</span><span style="flex: 1 1 480px">Drought impact assessment on agricultural security in the Mae Chang watershed, Lampang (Year 2)</span></li>
-<li style="display: flex; flex-wrap: wrap; gap: 4px 32px; padding: 18px 0; border-bottom: 1px solid #D5DBD2"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2E6A4C; min-width: 120px">2022 – 2025</span><span style="flex: 1 1 480px">Forest stand management and experiments for ecosystem preservation in protected forests of Thailand (Phase 1)</span></li>
-<li style="display: flex; flex-wrap: wrap; gap: 4px 32px; padding: 18px 0; border-bottom: 1px solid #D5DBD2"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2E6A4C; min-width: 120px">2021 – 2023</span><span style="flex: 1 1 480px">Developing government policy for buffer-zone management at Huai Thap Salao–Huai Rabam Non-Hunting Area, Uthai Thani</span></li>
-<li style="display: flex; flex-wrap: wrap; gap: 4px 32px; padding: 18px 0; border-bottom: 1px solid #D5DBD2"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2E6A4C; min-width: 120px">2020 – 2021</span><span style="flex: 1 1 480px">Wildlife habitat management for large herbivores: developing wildlife food plots in the buffer area of Huai Kha Khaeng World Heritage Site</span></li>
-<li style="display: flex; flex-wrap: wrap; gap: 4px 32px; padding: 18px 0; border-bottom: 1px solid #D5DBD2"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2E6A4C; min-width: 120px">2018 – 2020</span><span style="flex: 1 1 480px">Wildlife-based ecotourism for habitat and buffer-zone management in the Western Forest Complex (TIGER Project)</span></li>
-<li style="display: flex; flex-wrap: wrap; gap: 4px 32px; padding: 18px 0; border-bottom: 1px solid #D5DBD2"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #2E6A4C; min-width: 120px">2016 – 2017</span><span style="flex: 1 1 480px">Dholes Research Project in Thailand</span></li>
+<li class="proj"><figure class="proj-photo" data-peek-label="2024 – now"><img src="images/wild-pig-fenced-plot.jpg" data-full="images/wild-pig-fenced-plot-lg.jpg" alt="A field team working in the forest understory, seen through a chain-link fence around a plot" width="800" height="600" loading="lazy"></figure><div class="proj-body"><span class="proj-year">2024 – now</span><span class="proj-text">Thailand's wild pig status after the African Swine Fever pandemic and its abundance impacts on plant communities</span></div></li>
+<li class="proj"><figure class="proj-photo" data-peek-label="2023 – 2024"><img src="images/drought-field-sensor.jpg" data-full="images/drought-field-sensor-lg.jpg" alt="A solar-powered sensor station on a blue pole beside rows of young plants with drip irrigation lines, buildings and hills behind" width="800" height="600" style="object-position: 60% 55%" loading="lazy"></figure><div class="proj-body"><span class="proj-year">2023 – 2024</span><span class="proj-text">Drought impact assessment on agricultural security in the Mae Chang watershed, Lampang (Year 2)</span></div></li>
+<li class="proj"><figure class="proj-photo" data-peek-label="2022 – 2025"><img src="images/tree-girth-measuring.jpg" data-full="images/tree-girth-measuring-lg.jpg" alt="A researcher holding data sheets measures the girth of a tagged tree with a tape at a red-painted band" width="800" height="600" loading="lazy"></figure><div class="proj-body"><span class="proj-year">2022 – 2025</span><span class="proj-text">Forest stand management and experiments for ecosystem preservation in protected forests of Thailand (Phase 1)</span></div></li>
+<li class="proj"><figure class="proj-photo" data-peek-label="2021 – 2023"><img src="images/buffer-zone-clearing.jpg" data-full="images/buffer-zone-clearing-lg.jpg" alt="A group of people standing in a grassy clearing with young trees and a forested hill behind, under a clear blue sky" width="800" height="600" style="--zoom: 1.8; transform-origin: 63% 93%" loading="lazy"></figure><div class="proj-body"><span class="proj-year">2021 – 2023</span><span class="proj-text">Developing government policy for buffer-zone management at Huai Thap Salao–Huai Rabam Non-Hunting Area, Uthai Thani</span></div></li>
+<li class="proj"><figure class="proj-photo" data-peek-label="2020 – 2021"><img src="images/food-plot-survey.jpg" data-full="images/food-plot-survey-lg.jpg" alt="A field team walking up a forest trail while a person in a camouflage uniform crouches among seedlings to take notes" width="800" height="532" loading="lazy"></figure><div class="proj-body"><span class="proj-year">2020 – 2021</span><span class="proj-text">Wildlife habitat management for large herbivores: developing wildlife food plots in the buffer area of Huai Kha Khaeng World Heritage Site</span></div></li>
+<li class="proj"><figure class="proj-photo" data-peek-label="2018 – 2020"><img src="images/tiger-project-forest.jpg" data-full="images/tiger-project-forest-lg.jpg" alt="A researcher walking through dense green forest understory, holding a clipboard" width="800" height="534" style="object-position: 62% 55%; --zoom: 1.35; transform-origin: 62% 56%" loading="lazy"></figure><div class="proj-body"><span class="proj-year">2018 – 2020</span><span class="proj-text">Wildlife-based ecotourism for habitat and buffer-zone management in the Western Forest Complex (TIGER Project)</span></div></li>
+<li class="proj"><figure class="proj-photo" data-peek-label="2016 – 2017"><img src="images/dhole-field-survey.jpg" data-full="images/dhole-field-survey-lg.jpg" alt="A researcher kneeling on a bamboo-forest trail to examine scat, with a ruler, GPS unit, clipboard and sample bag laid out beside it" width="800" height="533" loading="lazy"></figure><div class="proj-body"><span class="proj-year">2016 – 2017</span><span class="proj-text">Dholes Research Project in Thailand</span></div></li>
 </ol>
 </div>
 </section>
@@ -273,18 +292,18 @@ a.cites:hover::after,a.cites:focus-visible::after{opacity:1;transform:none}
 
 </div>
 <script>
-/* Hover (or keyboard focus) on a figure tile shows a larger preview beside it. */
+/* Hover (or keyboard focus) on a figure tile or project photo shows a larger preview beside it. */
 (function () {
-  var list = document.getElementById('pub-list'); if (!list) return;
+  var TILE = '.pub-fig, .proj-photo';
   var fine = window.matchMedia ? matchMedia('(hover: hover) and (pointer: fine)') : { matches: false };
-  var peek, big, label, timer, current, shown, frame;
+  var peek, big, label, hint, timer, current, shown, frame;
   var CHROME = 22, CAPTION = 30;
   // Built on first use, so the page has no empty <img> before anyone hovers.
   function build() {
     peek = document.createElement('div'); peek.className = 'pub-peek'; peek.setAttribute('aria-hidden', 'true');
     peek.innerHTML = '<img alt=""><p><b></b><span>Click to open the article</span></p>';
     document.body.appendChild(peek);
-    big = peek.querySelector('img'); label = peek.querySelector('b');
+    big = peek.querySelector('img'); label = peek.querySelector('b'); hint = peek.querySelector('span');
   }
   function hide() { clearTimeout(timer); current = shown = null; if (peek) peek.classList.remove('is-open'); }
   function ratioOf(img) { return Number(img.getAttribute('height')) / Number(img.getAttribute('width')) || 0.75; }
@@ -307,25 +326,26 @@ a.cites:hover::after,a.cites:focus-visible::after{opacity:1;transform:none}
       big.src = img.currentSrc || img.src;
       var full = img.getAttribute('data-full');
       if (full) { var hi = new Image(); hi.onload = function () { if (shown === fig) big.src = full; }; hi.src = full; }
-      label.textContent = img.alt.split(':')[0].replace(/ from the article$/, '');
+      label.textContent = fig.getAttribute('data-peek-label') || img.alt.split(':')[0].replace(/ from the article$/, '');
+      hint.style.display = fig.tagName === 'A' ? '' : 'none';
     }
     place(fig);
     if (shown) peek.classList.add('is-open');
   }
-  list.addEventListener('mouseover', function (e) {
-    var fig = e.target.closest && e.target.closest('.pub-fig');
+  document.addEventListener('mouseover', function (e) {
+    var fig = e.target.closest && e.target.closest(TILE);
     if (!fig || fig === current || !fine.matches) return;
     clearTimeout(timer); current = fig;
     timer = setTimeout(function () { if (current === fig) show(fig); }, 120);
   });
-  list.addEventListener('mouseout', function (e) {
-    var fig = e.target.closest && e.target.closest('.pub-fig');
+  document.addEventListener('mouseout', function (e) {
+    var fig = e.target.closest && e.target.closest(TILE);
     if (fig && !fig.contains(e.relatedTarget)) hide();
   });
-  list.addEventListener('focusin', function (e) {
+  document.addEventListener('focusin', function (e) {
     if (e.target.classList.contains('pub-fig')) { current = e.target; show(e.target); }
   });
-  list.addEventListener('focusout', hide);
+  document.addEventListener('focusout', function (e) { if (e.target.closest && e.target.closest(TILE)) hide(); });
   addEventListener('scroll', function () {
     if (!shown || frame) return;
     frame = requestAnimationFrame(function () { frame = null; if (shown) place(shown); });
