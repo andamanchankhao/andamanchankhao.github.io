@@ -48,18 +48,35 @@ a.cites:hover::after,a.cites:focus-visible::after{opacity:1;transform:none}
 .proj-photo:hover img{transform:scale(calc(var(--zoom,1) * 1.04))}
 @media (max-width:760px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:calc((100vw - 56px) * .375);gap:8px}.gallery figcaption{left:6px;bottom:6px;max-width:calc(100% - 12px);padding:3px 7px;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
 @media (max-width:600px){.pub{grid-template-columns:96px minmax(0,1fr);gap:16px}.pub-fig{padding:3px}.proj{grid-template-columns:96px minmax(0,1fr);gap:16px}.proj-body:only-child{grid-column:1 / -1}}
-.hero-loc,.hero-stats{display:none}
+.hero-name,.hero-loc,.hero-stats,.nav-toggle{display:none}
 .hero-social{display:flex;flex-wrap:wrap;gap:8px}
 .hero-social a{box-sizing:border-box;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px 0 12px;border:1px solid #D5DBD2;border-radius:999px;background:#FFFFFF;color:#18241D;font-size:15px;font-weight:500;text-decoration:none}
 .hero-social a:hover{border-color:#2E6A4C;color:#2E6A4C}
 @media (max-width:760px){
+.site-header{position:sticky;top:0;z-index:40;margin-bottom:-61px;border-bottom-color:transparent !important;transition:background-color .2s,border-color .2s}
+.site-header nav{position:relative;box-sizing:border-box;min-height:60px;flex-wrap:nowrap !important;gap:12px !important;padding:8px 12px 8px 16px !important}
+.site-header.is-solid{background:rgba(242,244,239,.97);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);border-bottom-color:#D5DBD2 !important}
+.brand{font-size:16px !important;line-height:1.05;opacity:0;visibility:hidden;transition:opacity .2s,visibility 0s linear .2s}
+.brand span{display:block}
+.is-solid .brand{opacity:1;visibility:visible;transition-delay:0s}
+.nav-toggle{display:flex;align-items:center;justify-content:center;flex:none;box-sizing:border-box;width:44px;height:44px;margin-left:auto;padding:0;border:1px solid rgba(255,255,255,.7);border-radius:50%;background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 2px 10px rgba(24,36,29,.14);color:#18241D;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.is-solid .nav-toggle{border-color:#D5DBD2;background:#FFFFFF;box-shadow:none}
+.nav-toggle[aria-expanded="true"]{border-color:#2E6A4C;background:#FFFFFF}
+.nav-toggle:focus-visible{outline:2px solid #2E6A4C;outline-offset:2px}
+.nav-links{position:absolute;top:calc(100% + 4px);right:12px;display:none !important;flex-direction:column;gap:0 !important;box-sizing:border-box;width:220px;padding:6px;border:1px solid #D5DBD2;border-radius:14px;background:#FFFFFF;box-shadow:0 16px 40px rgba(24,36,29,.18)}
+.site-header.is-open .nav-links{display:flex !important}
+.nav-links a{display:flex;align-items:center;min-height:48px;padding:0 14px !important;border-radius:8px;font-size:16px}
+.nav-links a:hover,.nav-links a:focus-visible{background:#EEF2EC}
+section[id]{scroll-margin-top:60px}
+.hero-name{display:block;margin:0;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:40px;line-height:1;letter-spacing:-0.03em;color:#18241D}
+.hero-name span{display:block;color:#2E6A4C}
 .hero{padding:0 0 40px !important;display:flex !important;flex-direction:column;align-items:stretch !important;gap:0 !important}
 .hero-media{order:-1;position:relative;height:70vh;height:70svh;min-height:460px;max-height:640px}
 .hero-media img{position:absolute;inset:0;height:100% !important;aspect-ratio:auto !important;border-radius:0 !important}
 .hero-media::after{content:"";position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(rgba(242,244,239,0),#F2F4EF);pointer-events:none}
 .hero-caption,.stats-row{display:none !important}
 .hero-card{position:relative;z-index:1;margin:calc(-1 * clamp(72px, 14svh, 120px)) 16px 0;padding:24px 20px;gap:16px !important;border-radius:20px;background:rgba(242,244,239,.9);-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);box-shadow:0 12px 32px rgba(24,36,29,.16)}
-.hero-card h1{font-size:34px !important}
+.hero-card h1{font-size:24px !important;line-height:1.15 !important;letter-spacing:-0.02em !important}
 .hero-intro{font-size:16px !important}
 .hero-loc{display:flex;align-items:center;gap:6px;margin:-6px 0 0;font-size:14px;color:#4A5A50}
 .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);margin:0;padding:12px 0;border-top:1px solid #D5DBD2;border-bottom:1px solid #D5DBD2;text-align:center}
@@ -85,7 +102,7 @@ a.cites:hover::after,a.cites:focus-visible::after{opacity:1;transform:none}
 .lb-close:focus-visible,.lb-cap a:focus-visible{outline:2px solid #E0A86A;outline-offset:2px}
 @media (hover:none){.pub-peek{display:none}.pub-fig{cursor:pointer}}
 @media (hover:hover) and (pointer:fine){.proj-photo{cursor:zoom-in}}
-@media (prefers-reduced-motion:reduce){.pub-fig,.pub-fig img,.pub-peek,a.cites::after,.gallery img,.proj-photo,.proj-photo img,.lb{transition:none}.pub-fig:hover,.pub-fig:focus-visible,.pub-fig:hover img{transform:none}.gallery figure:hover img{transform:scale(var(--zoom,1))}.proj-photo:hover img{transform:scale(var(--zoom,1))}.proj-photo:hover{transform:none}}
+@media (prefers-reduced-motion:reduce){.site-header,.brand,.pub-fig,.pub-fig img,.pub-peek,a.cites::after,.gallery img,.proj-photo,.proj-photo img,.lb{transition:none}.pub-fig:hover,.pub-fig:focus-visible,.pub-fig:hover img{transform:none}.gallery figure:hover img{transform:scale(var(--zoom,1))}.proj-photo:hover img{transform:scale(var(--zoom,1))}.proj-photo:hover{transform:none}}
 </style>
 <style>html{scroll-behavior:smooth}</style>
 </head>
@@ -93,10 +110,11 @@ a.cites:hover::after,a.cites:focus-visible::after{opacity:1;transform:none}
 <div style="background: #F2F4EF; color: #18241D; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 17px; line-height: 1.6">
 
 <!-- NAV -->
-<header style="border-bottom: 1px solid #D5DBD2">
+<header class="site-header" style="border-bottom: 1px solid #D5DBD2">
 <nav aria-label="Main" style="max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px">
-<a href="#top" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: #18241D; text-decoration: none; letter-spacing: -0.01em">Andaman <span style="color: #2E6A4C">Chankhao</span></a>
-<div style="display: flex; flex-wrap: wrap; gap: 4px 24px; font-size: 15px; font-weight: 500">
+<a class="brand" href="#top" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; color: #18241D; text-decoration: none; letter-spacing: -0.01em">Andaman <span style="color: #2E6A4C">Chankhao</span></a>
+<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></button>
+<div id="nav-links" class="nav-links" style="display: flex; flex-wrap: wrap; gap: 4px 24px; font-size: 15px; font-weight: 500">
 <a href="#research" style="color: #18241D; text-decoration: none; padding: 10px 0">Research</a>
 <a href="#sites" style="color: #18241D; text-decoration: none; padding: 10px 0">Field sites</a>
 <a href="#projects" style="color: #18241D; text-decoration: none; padding: 10px 0">Projects</a>
@@ -110,10 +128,11 @@ a.cites:hover::after,a.cites:focus-visible::after{opacity:1;transform:none}
 <!-- HERO -->
 <section id="top" class="hero" style="max-width: 1200px; margin: 0 auto; padding: 88px 24px 56px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 56px; align-items: center">
 <div class="hero-card" style="display: flex; flex-direction: column; gap: 24px">
-<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #9A5418">Ph.D. Student · Wildlife Biology &amp; Management</p>
-<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(44px, 6vw, 76px); line-height: 1.02; letter-spacing: -0.03em">Mapping what wildlife eats, from forest plot to satellite.</h1>
+<p class="hero-name">Andaman <span>Chankhao</span></p>
 <p class="hero-loc"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Kasetsart University · Mahidol University</p>
 <dl class="hero-stats"><div><dt>Papers</dt><dd data-stat="works">9</dd></div><div><dt>Citations</dt><dd data-stat="citations">35</dd></div><div><dt>h-index</dt><dd data-stat="hindex">4</dd></div></dl>
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #9A5418">Ph.D. Student · Wildlife Biology &amp; Management</p>
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(44px, 6vw, 76px); line-height: 1.02; letter-spacing: -0.03em">Mapping what wildlife eats, from forest plot to satellite.</h1>
 <p class="hero-intro" style="margin: 0; font-size: 20px; line-height: 1.55; color: #3E4D44; max-width: 34em">I'm Andaman Chankhao, a Ph.D. student in Forestry at Kasetsart University and an Assistant Lecturer at Mahidol University. I study forage, the plants large herbivores depend on, in Thailand's seasonally dry forests, combining permanent field plots with satellite remote sensing.</p>
 <div class="hero-actions" style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 8px">
 <a href="#publications" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; background: #2E6A4C; color: #FFFFFF; text-decoration: none; font-weight: 600; border-radius: 6px">Read my publications</a>
@@ -333,6 +352,35 @@ a.cites:hover::after,a.cites:focus-visible::after{opacity:1;transform:none}
 </section>
 
 </div>
+<script>
+/* Phone menu: the three-dots button opens the section links. The bar turns solid and shows
+   the name once the card's name has scrolled up under it. */
+(function () {
+  var header = document.querySelector('.site-header');
+  var btn = header && header.querySelector('.nav-toggle');
+  var links = document.getElementById('nav-links');
+  var name = document.querySelector('.hero-name');
+  if (!btn || !links) return;
+  function isOpen() { return header.classList.contains('is-open'); }
+  function setOpen(open, refocus) {
+    header.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (!open && refocus) btn.focus();
+  }
+  btn.addEventListener('click', function () { setOpen(!isOpen()); });
+  links.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+  document.addEventListener('click', function (e) { if (isOpen() && !header.contains(e.target)) setOpen(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && isOpen()) setOpen(false, true); });
+  header.addEventListener('focusout', function (e) { if (isOpen() && e.relatedTarget && !header.contains(e.relatedTarget)) setOpen(false); });
+  function solid() {
+    var on = !name || !name.offsetParent || name.getBoundingClientRect().bottom <= header.offsetHeight;
+    header.classList.toggle('is-solid', on);
+  }
+  addEventListener('scroll', solid, { passive: true });
+  addEventListener('resize', function () { solid(); if (isOpen() && !btn.offsetParent) setOpen(false); });
+  solid();
+})();
+</script>
 <script>
 /* Tap (phones) or click (photos on desktop) opens the image fitted to the screen. */
 (function () {
